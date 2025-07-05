@@ -1,0 +1,9 @@
+flask
+gunicorn
+markupsafe
+requests
+Werkzeug
+aiogram
+aiohttp
+python-dotenv
+uvicorn
