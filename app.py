@@ -6,7 +6,6 @@ import uuid
 import threading
 import asyncio
 
-from bot import bot, dp
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
@@ -98,20 +97,11 @@ def delete_product(id):
     return redirect(url_for('index'))
 
 
-# ---------- Блок для запуску бота у другому потоці ----------
-async def bot_start():
-    await dp.start_polling(bot)
-
-def run_bot():
-    asyncio.run(bot_start())
 
 # ---------- Запуск Flask і бота одночасно ----------
 if __name__ == '__main__':
     if not os.path.exists('static/uploads'):
         os.makedirs('static/uploads')
-
-    #bot_thread = threading.Thread(target=run_bot)
-    #bot_thread.start()
 
     app.run(host='0.0.0.0', port=5000)
 
