@@ -25,6 +25,7 @@ async def show_category(message: Message):
             return
         for product in products:
             print(product)
+            return
             """
             product_id, name, desc, photo, price = product
             caption = f"<b>{name}</b>\n{desc}\n💵 {price} грн"
