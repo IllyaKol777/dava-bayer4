@@ -25,9 +25,7 @@ async def show_category(message: Message):
             return
         for product in products:
             product_id, name, desc, photo, price = product
-            photo = os.path.basename(photo)
-            print(photo)
-            photo = f"https://dava-bayer.onrender.com/static/uploads/{photo}"
             caption = f"<b>{name}</b>\n{desc}\n💵 {price} грн"
-            #photo = FSInputFile(os.path.join("static/uploads", photo))
-            await message.answer_photo(photo=photo, caption=caption, reply_markup=product_buttons(product_id), parse_mode="HTML")
+            photo_path = os.path.join("static/uploads", os.path.basename(photo))
+            photo_file = FSInputFile(photo_path)
+            await message.answer_photo(photo=photo_file, caption=caption, reply_markup=product_buttons(product_id), parse_mode="HTML")
