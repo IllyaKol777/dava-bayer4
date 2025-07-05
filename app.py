@@ -5,9 +5,10 @@ from werkzeug.utils import secure_filename
 import uuid
 import asyncio
 import json
+import threading
 
 from aiogram.types import Update
-from bot import bot, dp  # Твій бот і dispatcher з усіма підключеними роутерами
+from bot import bot, dp  # Імпортуємо бота та dispatcher з підключеними роутерами
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
@@ -116,16 +117,25 @@ async def process_webhook():
         print('Помилка обробки:', e)
     return 'OK', 200
 
-# Встановлення webhook перед першим запитом
-@app.before_first_request
-def setup_webhook():
-    asyncio.run(bot.set_webhook(WEBHOOK_URL))
+# Асинхронна функція для встановлення webhook
+async def set_webhook():
+    await bot.set_webhook(WEBHOOK_URL)
     print('Webhook встановлено:', WEBHOOK_URL)
+
+# Функція для запуску webhook в окремому потоці
+def start_webhook():
+    asyncio.run(set_webhook())
 
 if __name__ == '__main__':
     if not os.path.exists('static/uploads'):
         os.makedirs('static/uploads')
+
+    # Запускаємо встановлення webhook в окремому потоці
+    threading.Thread(target=start_webhook).start()
+
+    # Запускаємо Flask
     app.run(host='0.0.0.0', port=5000)
+
 
 
 
