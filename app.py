@@ -110,8 +110,8 @@ if __name__ == '__main__':
     if not os.path.exists('static/uploads'):
         os.makedirs('static/uploads')
 
-    bot_thread = threading.Thread(target=run_bot)
-    bot_thread.start()
+    #bot_thread = threading.Thread(target=run_bot)
+    #bot_thread.start()
 
     app.run(host='0.0.0.0', port=5000)
 
