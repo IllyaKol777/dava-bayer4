@@ -29,4 +29,5 @@ async def show_category(message: Message):
             photo = os.path.basename(photo)  # Тільки файл, без шляху
             photo_path = os.path.join("static", "uploads", photo)  # Тут вже правильний шлях
             photo_file = FSInputFile(photo_path)
-            await message.answer_photo(photo=photo_file, caption=caption, reply_markup=product_buttons(product_id), parse_mode="HTML")
+            message.answer(photo_file)
+            #await message.answer_photo(photo=photo_file, caption=caption, reply_markup=product_buttons(product_id), parse_mode="HTML")
