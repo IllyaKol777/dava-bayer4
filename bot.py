@@ -1,25 +1,3 @@
-from aiogram import Bot, Dispatcher
-from handlers import start, menu, shop, cart, order
-from config import BOT_TOKEN
-from database import init_db  # Якщо тобі потрібна ініціалізація БД
-
-
-bot = Bot(token=BOT_TOKEN)
-dp = Dispatcher()
-
-init_db()
-
-dp.include_routers(
-    start.router,
-    menu.router,
-    shop.router,
-    cart.router,
-    order.router
-)
-
-
-
-"""
 import asyncio
 from aiogram import Bot, Dispatcher
 from config import BOT_TOKEN
@@ -45,17 +23,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-
-bot = Bot(token=BOT_TOKEN)
-dp = Dispatcher()
-
-init_db()
-
-dp.include_routers(
-    start.router,
-    menu.router,
-    shop.router,
-    cart.router,
-    order.router
-)"""
