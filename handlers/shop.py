@@ -24,10 +24,13 @@ async def show_category(message: Message):
             await message.answer(f"🔍 Наразі немає товарів у категорії <b>{category}</b>.", parse_mode="HTML")
             return
         for product in products:
+            print(product)
+            """
             product_id, name, desc, photo, price = product
             caption = f"<b>{name}</b>\n{desc}\n💵 {price} грн"
             photo = os.path.basename(photo)  # Тільки файл, без шляху
             photo_path = os.path.join("static", "uploads", photo)  # Тут вже правильний шлях
             photo_file = FSInputFile(photo_path)
             message.answer(f"photo_file")
+            """
             #await message.answer_photo(photo=photo_file, caption=caption, reply_markup=product_buttons(product_id), parse_mode="HTML")
